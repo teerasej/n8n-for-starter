@@ -1,6 +1,6 @@
-# n8n Workshop — Finance Teams in Hospitals (1‑Day)
+# n8n Workshop for Beginner — Finance Teams (1‑Day)
 
-This repo contains step‑by‑step, beginner‑friendly lessons to learn n8n. It’s designed for non‑technical staff and leaders in a hospital’s finance department. All lessons are bilingual (English + Thai) and use finance‑relevant examples.
+เวิร์กช็อปนี้สอน n8n แบบทีละขั้นตอนสำหรับผู้เริ่มต้น เหมาะสำหรับบุคลากรที่ไม่ใช่สายเทคนิค และใช้ตัวอย่างที่เกี่ยวข้องกับงานการเงินเพื่อให้เรียนรู้และนำไปใช้ได้จริง
 
 ## Schedule (1 day)
 - 09:30–10:00 - Introduction to Automation with n8n 
@@ -20,3 +20,17 @@ This repo contains step‑by‑step, beginner‑friendly lessons to learn n8n. I
 - docs/lessons/lesson-04/README.md — Activate, Monitor, and handle errors
 - docs/lessons/lesson-05/README.md — Privacy & Security (links)
 
+## Contact
+
+- Instructor: Teerasej Jiraphatchandej
+    - Facebook: https://facebook.com/teerasej
+    - Youtube: https://www.youtube.com/@teerasej
+
+- Nextflow
+    - Website: https://nextflow.in.th
+    - Email: [training@nextflow.in.th](mailto:training@nextflow.in.th)
+
+
+## Copyright
+
+Copyright (c) 2024–2025 Amaround Co., Ltd. All rights reserved.
