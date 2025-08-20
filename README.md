@@ -4,7 +4,7 @@ This repo contains step‑by‑step, beginner‑friendly lessons to learn n8n. I
 
 ## Schedule (1 day)
 - 09:30–10:00 - Introduction to Automation with n8n 
-- 10:00–10:30 - Topic 1 - Account Setup & Overview of n8n Interface and Features
+- 10:00–10:30 - Topic 1 - [Account Setup](/docs/lessons/lesson-02/register.md) & Overview of n8n Interface and Features
 - 10:30–10:45 - Break
 - 10:45–12:00 - Topic 2 — Getting Started with n8n (with account setup)
 - 12:00–13:00 - Lunch
