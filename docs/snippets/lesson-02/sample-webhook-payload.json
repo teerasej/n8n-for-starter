@@ -1,0 +1,6 @@
+{
+  "patientId": "PT-100245",
+  "amount": 1200.50,
+  "description": "Outpatient meds reimbursement",
+  "requestedBy": "finance_user@hospital.org"
+}

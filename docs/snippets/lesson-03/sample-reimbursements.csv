@@ -1,0 +1,5 @@
+requestId,patientId,amount,description
+REQ-001,PT-100245,1200.5,Outpatient meds reimbursement
+REQ-002,PT-100311,-50,Negative amount test
+REQ-003,PT-100522,6000,High amount needs review
+REQ-004,,300,Missing patientId test
