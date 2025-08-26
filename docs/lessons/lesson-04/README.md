@@ -1,111 +1,130 @@
-# Lesson 04 — Activate, Monitor, and Handle Errors
+# Lesson 03 — Integration
 
-What you will build
-- Enable production execution, add monitoring, and handle common errors for finance workflows.
-[TH] สิ่งที่จะสร้าง
-- เปิดใช้งานสำหรับงานจริง เพิ่มการติดตาม และจัดการข้อผิดพลาดสำหรับเวิร์กโฟลว์การเงิน
+## ขั้นตอน
 
-Prerequisites
-- Completed Lessons 02 and 03
-[TH] ข้อกำหนดก่อนเริ่ม
-- ทำบทเรียน 02 และ 03 แล้ว
+### Step 1: สร้าง Workflow และ trigger
 
-Time required
-- ~60 minutes
-[TH] เวลาที่ใช้
-- ~60 นาที
+1. เข้าหน้า Dashboard ผ่าน [https://app.n8n.cloud/dashboard](https://app.n8n.cloud/dashboard) > กดปุ่ม Open instance
+2. กดปุ่ม **Create Workflow**
+3. จากส่วน editor ให้คลิกที่ชื่อ workflow ด้านบนซ้าย > เปลี่ยนชื่อเป็น `Cleaning Data` > กด enter
+4. จากกลางหน้า editor ให้คลิกที่ปุ่ม **+** เพื่อเพิ่ม Node trigger > เลือก **Trigger Manually**
 
-Outcome
-- You can activate workflows, switch Webhook to Production URL, inspect executions, and add basic retries/alerts.
-[TH] ผลลัพธ์
-- เปิดใช้งานเวิร์กโฟลว์ เปลี่ยน Webhook ไปใช้ Production URL ดู Execution และเพิ่มการ retry/แจ้งเตือนพื้นฐานได้
+### Step 2: อัพโหลดไฟล์ Excel เพื่อสร้างเป็น Google Sheet
 
-Steps
+1. ทำการ sign in เข้าไปที่ Google Drive ของเราเอง [https://drive.google.com](https://drive.google.com)
+2. [ดาวน์โหลดไฟล์ Excel จากที่นี่](https://docs.google.com/spreadsheets/d/1bitGdABma7poo8eDcGi6Fo6vTXmp4udV/edit?usp=sharing&ouid=109881510505807400189&rtpof=true&sd=true) 
+3. อัพโหลดไฟล์ Excel ไปที่ Google Drive ของเรา
+4. เปิดไฟล์ Excel ที่อัพโหลดขึ้นมาใน Google Sheets เพื่อเช็คโครงสร้างข้อมูล
 
-Step 1: Activate the workflow
-- Why: Make it run automatically when requests arrive.
-- Do this:
-    - Open your workflow.
-    - Click Activate. Confirm any prompts.
-    - On the "Webhook" node, switch to the "Production URL".
-- Success check: Status shows Active and you can access the Production URL.
-![Alt: Workflow activation with Production URL highlighted](../../images/lesson-04/step-01-activate.png)
-Description: Show Activate toggle on and Production URL visible.
+> ในที่นี้เราต้องการลบคำนำหน้าชื่อ และเว้นวรรคข้อมูลในส่วนของที่อยู่ให้เรียบร้อย รวมถึงการนำรหัสไปรษณีย์และจังหวัดออกมาไว้ในข้อความต่างหาก
 
-[TH] ขั้นตอนที่ 1: เปิดใช้งานเวิร์กโฟลว์
-- ทำไม: ให้เวิร์กโฟลว์ทำงานอัตโนมัติเมื่อมีคำขอเข้า
-- วิธีทำ:
-    - เปิดเวิร์กโฟลว์ของคุณ
-    - คลิก Activate และยืนยัน
-    - ที่โหนด "Webhook" เปลี่ยนไปใช้ "Production URL"
-- ตรวจสอบความสำเร็จ: สถานะแสดง Active และเห็น Production URL
-![Alt: เปิดใช้งานเวิร์กโฟลว์พร้อม Production URL](../../images/lesson-04/step-01-activate.png)
-คำอธิบาย: แสดงปุ่ม Activate เปิดอยู่ และเห็น Production URL
+### Step 3: สร้าง Node เพื่อเชื่อมต่อกับ Google Sheet
 
-Step 2: Inspect Executions
-- Why: Troubleshoot and verify real runs.
-- Do this:
-    - Open Executions view from the top bar.
-    - Filter by status (Success/Failed).
-    - Click into a failed run to see node‑level data.
-- Success check: You can identify which node failed and why.
-![Alt: Executions view showing a failed and a successful run](../../images/lesson-04/step-02-executions.png)
-Description: Show Executions list and one expanded run.
+1. กดปุ่ม **+** เพื่อเพิ่ม node ใหม่ > เลือก **Google Sheets** 
+   ![alt text](images/2025-08-26_22-30-21.png)
+2. เลือก **Get row(s) in Sheet** action 
+   ![alt text](images/2025-08-26_22-30-32.png)
+3. ในการเชื่อมต่อกับ Google ครั้งแรก ให้กดเลือก **Create new credential**
+   ![alt text](images/2025-08-26_22-30-41.png)
+4. กดปุ่ม Sign in with Google และทำการอนุญาตให้เรียบร้อย
+   ![alt text](images/2025-08-26_22-30-50.png)
+5. ถ้าสำเร็จ หน้าต่างจะแสดงกล่องสีเขียวดังภาพ เพื่อยืนยันการเชื่อมต่อ
+   ![alt text](images/2025-08-26_22-31-23.png)
+6. หลังจากเชื่อมต่อแล้ว ให้ตั้งค่าตามนี้
+    - **Resource:** Sheet Within Document
+    - **Operation:** Get Rows
+    - **Document: (By List)** Dirty Data
+    - **Sheet: (From List)** Sheet1 
+   ![alt text](images/2025-08-26_22-44-02.png)
+7. กด back to canvas ด้านบนซ้าย เพื่อกลับมาที่ editor
 
-[TH] ขั้นตอนที่ 2: ตรวจสอบ Executions
-- ทำไม: แก้ปัญหาและตรวจสอบการทำงานจริง
-- วิธีทำ:
-    - เปิดหน้าต่าง Executions จากแถบด้านบน
-    - กรองตามสถานะ (Success/Failed)
-    - คลิกที่รายการที่ล้มเหลวเพื่อดูข้อมูลระดับโหนด
-- ตรวจสอบความสำเร็จ: ระบุได้ว่าโหนดใดล้มเหลวและสาเหตุคืออะไร
-![Alt: มุมมอง Executions แสดงงานสำเร็จและล้มเหลว](../../images/lesson-04/step-02-executions.png)
-คำอธิบาย: แสดงรายการ Executions และขยายดูหนึ่งรายการ
+> เคล็ดลับ: เราสามารถเชื่อมต่อ Google Account อื่นได้ โดยการกดที่ปุ่มอีกทีครับ
 
-Step 3: Add simple retries with "HTTP Request"
-- Why: Temporary API issues can resolve on retry.
-- Do this:
-    - In "HTTP Request" node, enable retry on failure (Max attempts 3, Backoff e.g., exponential).
-    - Optionally add "Wait" between retries.
-- Success check: Intermittent failures recover on retry.
-![Alt: HTTP Request retry settings configured](../../images/lesson-04/step-03-retry.png)
-Description: Show HTTP Request node settings with retry enabled.
+### Step 3: สร้าง Node เพื่อ clean ข้อมูลชื่อ 
 
-[TH] ขั้นตอนที่ 3: เพิ่มการลองใหม่ (retry) แบบง่าย
-- ทำไม: ปัญหา API ชั่วคราวมักหายเมื่อลองใหม่
-- วิธีทำ:
-    - ในโหนด "HTTP Request" เปิดการ retry เมื่อเกิดข้อผิดพลาด (เช่น 3 ครั้ง แบบ exponential)
-    - ตัวเลือก: เพิ่มโหนด "Wait" ระหว่างการลองใหม่
-- ตรวจสอบความสำเร็จ: ความล้มเหลวชั่วคราวกลับมาสำเร็จได้เมื่อ retry
-![Alt: ตั้งค่า retry ในโหนด HTTP Request](../../images/lesson-04/step-03-retry.png)
-คำอธิบาย: แสดงการตั้งค่า retry ของ HTTP Request
+1. กดปุ่ม **+** เพื่อเพิ่ม node ใหม่ > เลือก **Edit Field (Set)** 
+   
+2. กำหนดค่าตามรายการด้านล่าง 
+   - Name: Cleansing Prefix
+   - Field to Set: 
+     - ลากคอลัมภ์ `id` มาวางในช่องนี้
+     - ลากคอลัมภ์ `name` มาวางในช่องนี้ และแก้สูตรเป็น 
+       ```
+       {{$json.name.replace(/^(คุณ|นาย|นางสาว|น.ส.|นาง)\s*/,'')}}
+       ```
+    ![alt text](images/2025-08-26_22-47-45.png)
 
-Step 4: Notify on failures (optional)
-- Why: Keep the team informed.
-- Do this:
-    - Add an "IF" node after critical steps to detect non‑200 status.
-    - On false branch, add a notification node (e.g., Email via "SMTP" or chat via "Slack").
-- Success check: A test failure triggers a message.
-![Alt: Notification branch sending email on failure](../../images/lesson-04/step-04-notify.png)
-Description: Show IF false branch to an email/slack node with sample message.
+3. กดปุ่มทดสอบการทำงานให้ได้เหมือนดังภาพด้านบน (คำนำหน้าชื่อถูกลบไปแล้ว)
+4. กด back to canvas ด้านบนซ้าย เพื่อกลับมาที่ editor
 
-[TH] ขั้นตอนที่ 4: แจ้งเตือนเมื่อเกิดข้อผิดพลาด (ตัวเลือก)
-- ทำไม: ให้ทีมรับรู้ทันที
-- วิธีทำ:
-    - เพิ่มโหนด "IF" หลังขั้นตอนสำคัญเพื่อตรวจจับสถานะที่ไม่ใช่ 200
-    - ในแขนง false เพิ่มโหนดแจ้งเตือน (อีเมลผ่าน "SMTP" หรือแชทผ่าน "Slack")
-- ตรวจสอบความสำเร็จ: เมื่อจำลองความผิดพลาด ระบบส่งข้อความแจ้งเตือน
-![Alt: แขนงแจ้งเตือนเมื่อเกิดข้อผิดพลาด](../../images/lesson-04/step-04-notify.png)
-คำอธิบาย: แสดงแขนง false ต่อกับโหนดอีเมล/แชทพร้อมข้อความตัวอย่าง
+### Step 4: สร้าง Node เพื่ออัพเดทชื่อที่ปรับปรุงแล้วกลับเข้าไปใน sheet
 
-Troubleshooting
-- No executions: Ensure workflow is Active and using Production URL.
-- Too many retries: Cap attempts and add delay.
-[TH] แก้ปัญหา
-- ไม่มีการรัน: ตรวจสอบว่า Active แล้วและใช้ Production URL
-- retry มากเกินไป: จำกัดจำนวนครั้งและเพิ่มการหน่วงเวลา
+1. กดปุ่ม **+** เพื่อเพิ่ม node ใหม่ > เลือก **Google Sheets** > เลือก **Update Row in Sheet** action  
+2. ให้ตั้งค่าตามนี้
+   1. เลือกเป้าหมายเป็น Google sheet ไฟล์เดิม ในหน้า Sheet1
+   2. ตั้งค่า **Mapping Column Mode:** `Map Each Column Manually`
+   3. ลากคอลัมภ์ `id` มาวางในช่อง **id (using to match)**
+   ![alt text](images/2025-08-26_22-52-04.png)
 
-Next steps
-- Review Lesson 05 for privacy/security guidelines before going live.
-[TH] ขั้นต่อไป
-- อ่านบทเรียน 05 เรื่องความเป็นส่วนตัว/ความปลอดภัย ก่อนใช้งานจริง
+3. จาก input node **Cleansing Prefix** ลากคอลัมภ์ `name` มาวางในช่อง **name**
+   ![alt text](images/2025-08-26_22-51-32.png)
+
+4. ทดสอบ execute node และดูผลลัพธ์ที่ไฟล์ Google Sheets
+5. กลับมาที่ n8n กด back to canvas ด้านบนซ้าย เพื่อกลับมาที่ editor
+
+### Step 5: สร้าง Node เพื่อใช้ AI Model ในการปรับที่อยู่
+
+1. กดปุ่ม **+** เพื่อเพิ่ม node ใหม่ > เลือก **OpenAI** > เลือก **Message a model** action > ตั้งชื่อว่า `Address Cleaner`
+2. ให้ตั้งค่าตามนี้
+   1. ให้แน่ใจว่าได้เลือกการเชื่อมต่อกับ OpenAI ที่มี หรือสร้างไว้ก่อนหน้านี้
+   2. Model: `gpt-4o-mini`
+   3. จาก input node **Get row(s) in sheet** ลาก column **address_raw** มาวางในช่อง **Message Prompt**
+   4. ให้แน่ใจว่าได้ตั้งค่า **Message Prompt** ดังนี้
+        ```
+        You are a Thai address cleaner. Normalize spacing and abbreviations. Don’t invent missing data. Output JSON with keys: address_clean.
+
+        {{ $('Get row(s) in sheet').item.json.address_raw }}
+        ```
+    5. เปิดตัวเลือก **Simplify Output** และ **Output Content as JSON**
+    ![alt text](images/2025-08-26_22-58-48.png)
+
+3. ทดสอบ execute node และดูผลลัพธ์ที่ได้
+
+### Step 6: สร้าง Node เพื่อใช้ AI Model ในสกัดข้อมูลที่ต้องการ
+
+1. กดปุ่ม **+** เพื่อเพิ่ม node ใหม่ > เลือก **OpenAI** > เลือก **Message a model** action > ตั้งชื่อว่า `Address Extractor`
+2. ให้ตั้งค่าตามนี้
+   1. ให้แน่ใจว่าได้เลือกการเชื่อมต่อกับ OpenAI ที่มี หรือสร้างไว้ก่อนหน้านี้
+   2. Model: `gpt-4o-mini`
+   3. จาก input node **Get row(s) in sheet** ลาก field **address_clean** มาวางในช่อง **Message Prompt**
+   4. ให้แน่ใจว่าได้ตั้งค่า **Message Prompt** ดังนี้
+        ```
+        You are Thai address professional. You will extract postal code and province's name from given address. Output JSON with key: postal_code, province. Don't invent missing data, use empty string if value not found.
+        {{ $json.message.content.address_clean }}
+        ```
+    5. เปิดตัวเลือก **Simplify Output** และ **Output Content as JSON**
+    ![alt text](images/2025-08-26_23-09-26.png)
+3. ทดสอบ execute node และดูผลลัพธ์ที่ได้
+
+### Step 7: สร้าง Node เพื่อใช้ Update ข้อมูลที่อยู่ที่ได้จาก workflow ลง Google Sheet
+
+1. กดปุ่ม **+** เพื่อเพิ่ม node ใหม่ > เลือก **Google Sheets** > เลือก **Update Row in Sheet** action  
+2. ให้ตั้งค่าตามนี้
+   1. เลือกเป้าหมายเป็น Google sheet ไฟล์เดิม ในหน้า Sheet1
+   2. ตั้งค่า **Mapping Column Mode:** `Map Each Column Manually`
+   3. Id: ให้ใช้ค่า `id` จาก node **Get row(s) in sheet**
+   4. address_raw: ให้ใช้ค่า `address_clean` จาก node **Address Cleaner**
+   5. postal_code: ให้ใช้ค่า `postal_code` จาก node **Address Extractor**
+   6. province: ให้ใช้ค่า `province` จาก node **Address Extractor**
+   ![alt text](images/2025-08-26_23-11-09.png)
+3. ทดสอบ execute node และดูผลลัพธ์ที่ไฟล์ Google Sheets
+
+
+## สรุป
+
+ในบทเรียนนี้เราได้เรียนรู้วิธีการใช้ n8n ในการทำงานกับ Google Sheets และ OpenAI API โดยมีขั้นตอนหลักๆ ดังนี้
+
+1. การดึงข้อมูลจาก Google Sheets
+2. การทำความสะอาดข้อมูลด้วย Regular Expressions
+3. การใช้ AI Model ในการปรับที่อยู่และสกัดข้อมูลที่ต้องการ
+4. การอัพเดทข้อมูลกลับไปยัง Google Sheets
