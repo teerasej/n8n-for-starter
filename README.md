@@ -2,6 +2,10 @@
 
 เวิร์กช็อปนี้สอน n8n แบบทีละขั้นตอนสำหรับผู้เริ่มต้น เหมาะสำหรับบุคลากรที่ไม่ใช่สายเทคนิค และใช้ตัวอย่างที่เกี่ยวข้องกับงานการเงินเพื่อให้เรียนรู้และนำไปใช้ได้จริง
 
+## Presentation
+
+- 
+
 ## Schedule (1 day)
 - 09:00–09:30 - Introduction to Automation with n8n 
 - 09:30–10:30 - [Account Setup](/docs/lessons/lesson-02/register.md) & [Overview of n8n Interface and Features](docs/lessons/lesson-02/README.md)
@@ -17,8 +21,8 @@
 ## Contact
 
 - Instructor: Teerasej Jiraphatchandej
-    - Facebook: https://facebook.com/teerasej
-    - Youtube: https://www.youtube.com/@teerasej
+    - Facebook: [https://facebook.com/teerasej](https://facebook.com/teerasej)
+    - Youtube: [https://www.youtube.com/@teerasej](https://www.youtube.com/@teerasej)
 
 - Nextflow
     - Website: https://nextflow.in.th
