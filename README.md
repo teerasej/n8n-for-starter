@@ -1,10 +1,10 @@
 # n8n Workshop for Beginner — Accounting Teams (1‑Day)
 
-เวิร์กช็อปนี้สอน n8n แบบทีละขั้นตอนสำหรับผู้เริ่มต้น เหมาะสำหรับบุคลากรที่ไม่ใช่สายเทคนิค และใช้ตัวอย่างที่เกี่ยวข้องกับงานการเงินเพื่อให้เรียนรู้และนำไปใช้ได้จริง
+เวิร์กช็อปนี้สอน n8n แบบทีละขั้นตอนสำหรับผู้เริ่มต้น เหมาะสำหรับบุคลากรที่ไม่ใช่สายเทคนิค และใช้ตัวอย่างที่เกี่ยวข้องกับเพื่อให้เรียนรู้และนำไปใช้ได้จริงครับ
 
 ## Presentation
 
-- 
+- [Presentation (PDF)](https://nextflowth-my.sharepoint.com/:b:/g/personal/teerasej_nextflowth_onmicrosoft_com/EWsUm4zEYaJIuS8cogqoBcgBoBBcZFh3mMHM8KvJpb5AjQ?e=EfYVNv)
 
 ## Schedule (1 day)
 - 09:00–09:30 - Introduction to Automation with n8n 
